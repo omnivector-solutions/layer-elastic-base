@@ -1,16 +1,4 @@
 options:
-  elastic-pkg:
-    description: >
-      The elastic.co software to install 
-      Examples - 
-        * elasticsearch
-        * logstash
-        * kibana
-        * filebeat
-        * packetbeat
-
-    type: string
-    default: ""
   install_sources:
     description: |
       list of extra apt sources, per charm-helpers standard
