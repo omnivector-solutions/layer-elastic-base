@@ -1,0 +1,18 @@
+name: elastic-base
+summary: Base layer for elastic.co charms
+maintainer: James Beedy <jamesbeedy@gmail.com>
+description: |
+  Almost all elastic.co software have similar install ops.
+  This layer provides a consistent way to install elastic.co
+  softway via apt, or supplied deb resource.
+tags:
+  - elastic
+  - misc
+  - installer
+series:
+- xenial
+resources:
+  elastic-deb:
+    type: file
+    filename: elastic.deb
+    description: Deb as obtained from https://www.elastic.co/downloads

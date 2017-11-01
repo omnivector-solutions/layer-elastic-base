@@ -1,0 +1,14 @@
+includes:
+  - 'layer:basic'
+  - 'layer:apt'
+options:
+  apt:
+    packages:
+      - 'openjdk-8-jre-headless'
+defines:
+  elastic-pkg:
+    type: string
+    default: ""
+    description: |
+      Elastic.co software to install
+repo: "https://github.com/jamesbeedy/layer-elastic-base"
