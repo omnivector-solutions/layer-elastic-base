@@ -50,7 +50,7 @@ def install_elastic_pkg():
     # so kernel files will not need to be modified on
     # elasticsearch install. See
     # https://github.com/elastic/elasticsearch/commit/32df032c5944326e351a7910a877d1992563f791
-    if is_container():
+    if is_container() and (ELASTIC_PKG == "elasticsearch"):
         os.environ['ES_SKIP_SET_KERNEL_PARAMETERS'] = 'true'
         status_set('maintenance',
                    "Installing in container based system")
