@@ -65,7 +65,7 @@ def install_elastic_pkg():
     else:
         status_set('maintenance',
                    "Installing {} from elastic.co apt repos".format(
-                       config(ELASTIC_PKG.capitalize())))
+                       ELASTIC_PKG.capitalize()))
         charms.apt.queue_install([ELASTIC_PKG])
 
     set_flag('elastic.{}.base.available'.format(ELASTIC_PKG))
