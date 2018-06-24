@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/local/sbin/charm-env python
 # pylint: disable=c0111,c0103,c0301
 import os
 import subprocess as sp
@@ -8,16 +8,17 @@ from charms.layer import options
 from charms.reactive import (
     set_flag,
     when,
-    when_not
+    when_any,
+    when_not,
 )
+
 from charmhelpers.core.hookenv import (
     config,
     resource_get,
     status_set,
 )
-from charmhelpers.core.host import (
-    is_container,
-)
+
+from charmhelpers.core.host import is_container
 
 import charms.apt
 
@@ -35,10 +36,9 @@ def check_elastic_pkg_layer_option():
 
 
 # Install/Init ops
-# We have java, and know what elastic pkg to install, so lets
-# get to it
+# We have java, and know what elastic pkg to install, so lets get to it
 @when('apt.installed.openjdk-8-jre-headless', 'elastic.pkg.set')
-@when_not('elastic.{}.base.available'.format(ELASTIC_PKG))
+@when_not('elastic.pkg.available')
 def install_elastic_pkg():
     """Check for container, install elastic pkg
     from either apt or supplied resource .deb.
@@ -67,5 +67,11 @@ def install_elastic_pkg():
                    "Installing {} from elastic.co apt repos".format(
                        ELASTIC_PKG.capitalize()))
         charms.apt.queue_install([ELASTIC_PKG])
+    set_flag('elastic.pkg.available')
 
-    set_flag('elastic.{}.base.available'.format(ELASTIC_PKG))
+
+@when_any('deb.installed.{}'.format(ELASTIC_PKG),
+          'apt.installed.{}'.format(ELASTIC_PKG))
+@when_not('elastic.base.available')
+def set_elastic_base_available():
+    set_flag('elastic.base.available')
