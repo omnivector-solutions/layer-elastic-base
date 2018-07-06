@@ -23,7 +23,7 @@ from charmhelpers.core.host import is_container
 import charms.apt
 
 
-ELASTIC_PKG = options('elastic-base').get('elastic-pkg', '')
+ELASTIC_PKG = options.get('elastic-base', 'elastic-pkg')
 
 
 @when_not('elastic.pkg.set')
