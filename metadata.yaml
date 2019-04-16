@@ -1,6 +1,7 @@
 name: elastic-base
 summary: Base layer for elastic.co charms
-maintainer: James Beedy <jamesbeedy@gmail.com>
+maintainers:
+  Omnivector Solutions <admin@omnivector.solutions>
 description: |
   Almost all elastic.co software have similar install ops.
   This layer provides a consistent way to install elastic.co
@@ -9,6 +10,7 @@ tags:
   - elastic
   - misc
   - installer
+  - omnivector
 series:
 - xenial
 - bionic
