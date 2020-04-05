@@ -61,7 +61,7 @@ def install_elastic_pkg():
         sp.call(['dpkg', '-i', elastic_deb])
         set_flag('deb.installed.{}'.format(ELASTIC_PKG))
     else:
-        status.maint('Installing {ELASTIC_PKG} from elastic.co apt repos')
+        status.maint(f'Installing {ELASTIC_PKG} from elastic.co apt repos')
         charms.apt.queue_install([ELASTIC_PKG])
     set_flag('elastic.pkg.installed.available')
 
