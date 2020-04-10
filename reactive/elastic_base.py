@@ -34,15 +34,15 @@ def check_elastic_pkg_layer_option():
 # We have java, and know what elastic pkg to install, so lets get to it
 @when('elastic.pkgs.available',
       'apt.installed.openjdk-8-jre-headless')
-@when_not('elastic.pkgs.available')
+@when_not('elastic.pkgs.installed')
 def install_elastic_pkgs():
     for pkg in ELASTIC_PKGS:
         status.maint(f'Installing {pkg} from elastic.co apt repos')
         charms.apt.queue_install([pkg])
-    set_flag('elastic.pkgs.available')
+    set_flag('elastic.pkgs.installed')
 
 
-@when('elastic.pkgs.available')
+@when('elastic.pkgs.installed')
 @when_not('elastic.base.available')
 def set_elastic_base_available():
     set_flag('elastic.base.available')
