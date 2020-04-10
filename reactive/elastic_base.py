@@ -23,7 +23,7 @@ ELASTIC_PKGS = options.get('elastic-base', 'elastic-pkgs')
 
 @when_not('elastic.pkgs.available')
 def check_elastic_pkg_layer_option():
-    if ELASTIC_PKGS:
+    if len(ELASTIC_PKGS) > 0:
         set_flag('elastic.pkgs.available')
     else:
         status.blocked('elastic-base layer option for elastic-pkgs not set.')
@@ -36,17 +36,6 @@ def check_elastic_pkg_layer_option():
       'apt.installed.openjdk-8-jre-headless')
 @when_not('elastic.pkgs.available')
 def install_elastic_pkgs():
-    """Check for container, install elastic pkgs..
-    """
-    # Workaround for container installs is to set
-    # ES_SKIP_SET_KERNEL_PARAMETERS if in container
-    # so kernel files will not need to be modified on
-    # elasticsearch install. See
-    # https://github.com/elastic/elasticsearch/commit/32df032c5944326e351a7910a877d1992563f791
-    if is_container() and ("elasticsearch" in ELASTIC_PKGS):
-        os.environ['ES_SKIP_SET_KERNEL_PARAMETERS'] = 'true'
-        status.maint('Installing in container based system')
-
     for pkg in ELASTIC_PKGS:
         status.maint(f'Installing {pkg} from elastic.co apt repos')
         charms.apt.queue_install([pkg])
@@ -56,5 +45,4 @@ def install_elastic_pkgs():
 @when('elastic.pkgs.available')
 @when_not('elastic.base.available')
 def set_elastic_base_available():
-    status.active('{ELASTIC_PKG} installed.')
     set_flag('elastic.base.available')
