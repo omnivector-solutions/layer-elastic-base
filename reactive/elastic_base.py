@@ -18,21 +18,21 @@ from charms.layer import status
 import charms.apt
 
 
-ELASTIC_PKGS = options.get('elastic-base', 'elastic-pkg')
+ELASTIC_PKGS = options.get('elastic-base', 'elastic-pkgs')
 
 
-@when_not('elastic.pkg.available')
+@when_not('elastic.pkgs.available')
 def check_elastic_pkg_layer_option():
     if ELASTIC_PKGS:
-        set_flag('elastic.pkg.available')
+        set_flag('elastic.pkgs.available')
     else:
-        status.blocked('elastic-base layer config for elastic-pkg not set.')
+        status.blocked('elastic-base layer option for elastic-pkgs not set.')
         return
 
 
 # Install/Init ops
 # We have java, and know what elastic pkg to install, so lets get to it
-@when('elastic.pkg.available',
+@when('elastic.pkgs.available',
       'apt.installed.openjdk-8-jre-headless')
 @when_not('elastic.pkgs.available')
 def install_elastic_pkgs():
