@@ -3,19 +3,12 @@ summary: Base layer for elastic.co charms
 maintainers:
 - Omnivector Solutions <admin@omnivector.solutions>
 description: |
-  Almost all elastic.co software have similar install ops.
+  Elastic.co software have similar install ops.
   This layer provides a consistent way to install elastic.co
-  softway via apt, or supplied deb resource.
+  softway via apt.
 tags:
   - elastic
   - misc
-  - installer
   - omnivector
 series:
-- xenial
 - bionic
-resources:
-  elastic-deb:
-    type: file
-    filename: elastic.deb
-    description: Deb as obtained from https://www.elastic.co/downloads

@@ -8,8 +8,8 @@ options:
       - 'openjdk-8-jre-headless'
 defines:
   elastic-pkg:
-    type: string
-    default: ""
+    type: array
+    default: []
     description: |
       Elastic.co software to install
 repo: "https://github.com/omnivector-solutions/layer-elastic-base"
