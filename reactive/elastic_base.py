@@ -48,8 +48,8 @@ def install_elastic_pkgs():
         status.maint('Installing in container based system')
 
     for pkg in ELASTIC_PKGS:
-        status.maint(f'Installing {ELASTIC_PKG} from elastic.co apt repos')
-        charms.apt.queue_install([ELASTIC_PKG])
+        status.maint(f'Installing {pkg} from elastic.co apt repos')
+        charms.apt.queue_install([pkg])
     set_flag('elastic.pkgs.available')
 
 
